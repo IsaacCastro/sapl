@@ -11,7 +11,7 @@ from sapl.api.base.forms import AutoresPossiveisFilterSet,\
 from sapl.api.base.serializers import AutorChoiceSerializer, AutorSerializer
 from sapl.api.serializers import (ChoiceSerializer)
 from sapl.base.models import Autor, TipoAutor
-from sapl.utils import SaplGenericRelation, sapl_logger
+from sapl.utils import SaplGenericRelation
 
 
 class AutorListView(ListAPIView):
@@ -112,14 +112,11 @@ class AutorListView(ListAPIView):
             tr = int(self.request.GET.get
                      ('tr', AutorListView.TR_AUTOR_CHOICE_SERIALIZER))
 
-            assert tr in (
-                AutorListView.TR_AUTOR_CHOICE_SERIALIZER,
-                AutorListView.TR_AUTOR_SERIALIZER), sapl_logger.info(
-                _("Tipo do Resultado a ser fornecido não existe!"))
+            if tr not in (AutorListView.TR_AUTOR_CHOICE_SERIALIZER,
+                          AutorListView.TR_AUTOR_SERIALIZER):
+                return AutorListView.TR_AUTOR_CHOICE_SERIALIZER
         except:
             return AutorListView.TR_AUTOR_CHOICE_SERIALIZER
-        else:
-            return tr
 
     def get(self, request, *args, **kwargs):
 
