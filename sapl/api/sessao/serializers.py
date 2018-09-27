@@ -123,16 +123,14 @@ class SessaoPlenariaOldSerializer(serializers.ModelSerializer):
 
 
 class SessaoPlenariaSerializer(serializers.ModelSerializer):
+    sessao_legislativa = serializers.StringRelatedField(many=False)
+    """legislatura = serializers.StringRelatedField(many=False)
+    tipo = serializers.StringRelatedField(many=False)
+    data_inicio = DateField(
+        format='%d/%m/%Y', input_formats=None)
+    data_fim = DateField(
+        format='%d/%m/%Y', input_formats=None)"""
 
     class Meta:
         model = SessaoPlenaria
-        fields = ('tipo',
-                  'sessao_legislativa',
-                  'legislatura',
-                  'data_inicio',
-                  'hora_inicio',
-                  'hora_fim',
-                  'url_video',
-                  'iniciada',
-                  'finalizada'
-                  )
+        fields = ('id', 'sessao_legislativa', )

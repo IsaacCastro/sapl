@@ -20,4 +20,5 @@ class SessaoPlenariaViewSet(ReadOnlyModelViewSet):
 
     permission_classes = (AllowAny,)
     serializer_class = SessaoPlenariaSerializer
-    queryset = SessaoPlenaria.objects.all()
+    queryset = SessaoPlenaria.objects.all().order_by(
+        '-data_inicio', '-hora_inicio')
