@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.fields import DateField
 
 from sapl.base.models import CasaLegislativa
 from sapl.sessao.models import SessaoPlenaria, OrdemDia
@@ -124,13 +125,12 @@ class SessaoPlenariaOldSerializer(serializers.ModelSerializer):
 
 class SessaoPlenariaSerializer(serializers.ModelSerializer):
     sessao_legislativa = serializers.StringRelatedField(many=False)
-    """legislatura = serializers.StringRelatedField(many=False)
+    legislatura = serializers.StringRelatedField(many=False)
     tipo = serializers.StringRelatedField(many=False)
     data_inicio = DateField(
         format='%d/%m/%Y', input_formats=None)
     data_fim = DateField(
-        format='%d/%m/%Y', input_formats=None)"""
+        format='%d/%m/%Y', input_formats=None)
 
     class Meta:
         model = SessaoPlenaria
-        fields = ('id', 'sessao_legislativa', )

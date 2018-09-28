@@ -1,7 +1,6 @@
 from builtins import LookupError
 
-import django
-from django.apps import apps
+from django import apps
 from django.contrib.auth import get_user_model
 from django.contrib.auth.management import _get_all_permissions
 from django.core import exceptions
@@ -20,11 +19,10 @@ from sapl.rules import (SAPL_GROUP_ADMINISTRATIVO, SAPL_GROUP_COMISSOES,
                         SAPL_GROUP_SESSAO)
 
 
-class AppConfig(django.apps.AppConfig):
+class AppConfig(apps.AppConfig):
     name = 'sapl.rules'
     label = 'rules'
     verbose_name = _('Regras de Acesso')
-    time_refresh = timezone.now()
 
 
 def create_proxy_permissions(
@@ -36,7 +34,7 @@ def create_proxy_permissions(
     # print(app_config)
 
     try:
-        Permission = apps.get_model('auth', 'Permission')
+        Permission = apps.apps.get_model('auth', 'Permission')
     except LookupError:
         return
 
@@ -258,9 +256,3 @@ models.signals.post_migrate.connect(
 models.signals.pre_delete.connect(
     receiver=revision_pre_delete_signal,
     dispatch_uid="pre_delete_signal")
-
-
-@receiver([post_save, post_delete])
-def refresh_time_update_base(sender, instance, **kwargs):
-    rule_app = apps.get_app_config('rules')
-    rule_app.time_refresh = timezone.now()

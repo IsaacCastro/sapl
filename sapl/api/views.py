@@ -5,8 +5,8 @@ from rest_framework.permissions import (IsAuthenticated, AllowAny)
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from sapl.api.apps import _time_refresh_models
 from sapl.api.serializers import ModelChoiceSerializer
-from sapl.rules.apps import AppConfig
 
 
 class ModelChoiceView(ListAPIView):
@@ -35,4 +35,4 @@ class TimeRefreshDatabaseView(APIView):
     permission_classes = (AllowAny,)
 
     def get(self, request, *args, **kwargs):
-        return Response({'last_global_refresh_time': apps.get_app_config('rules').time_refresh})
+        return Response(_time_refresh_models)
