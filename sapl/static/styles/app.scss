@@ -201,23 +201,23 @@ html {
 body {
   margin-bottom: $footer-height + 20px;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: $footer-height;
-  background: #364347 none repeat scroll 0% 0%;
-  color: white;
-  text-align: center;
-  p {
-    color: white;
-    margin-top: 10px;
-  }
-  .container {
-    padding-top: 25px;
-  }
-}
+.footer{
+    position:absolute;
+    width:100%;
+    background:#364347 none repeat scroll 0% 0%;
+    color:white;
+    text-align:center;
+    margin-top:20px;
+}  
+
+ .footer p{
+     color:white;
+     margin-top:10px;
+ }
+
+.footer .container{
+    padding-top:25px;
+ }
 
 label {
   margin-bottom: 0;
@@ -571,6 +571,14 @@ p {
   }
 }
 
+@media screen and (max-width: 512px) {
+    .table{
+        width: auto;
+        white-space: normal;
+        display:block;
+        overflow-x: auto;
+    }
+}
 
 @media (max-width: 1199px) {
   .masthead {
